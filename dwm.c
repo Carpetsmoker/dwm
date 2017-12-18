@@ -40,6 +40,7 @@
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
+#include <xkbcommon/xkbcommon-keysyms.h>
 
 #include "drw.h"
 #include "util.h"
@@ -155,14 +156,14 @@ static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
-static Monitor *dirtomon(int dir);
+//static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
-static void focusmon(const Arg *arg);
+//static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
@@ -175,7 +176,7 @@ static void killclient(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
-static void monocle(Monitor *m);
+//static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
@@ -202,12 +203,12 @@ static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
-static void tagmon(const Arg *arg);
+//static void tagmon(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
-static void toggletag(const Arg *arg);
+//static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
 static void unmanage(Client *c, int destroyed);
@@ -675,7 +676,7 @@ detachstack(Client *c)
 	}
 }
 
-Monitor *
+/*Monitor *
 dirtomon(int dir)
 {
 	Monitor *m = NULL;
@@ -688,7 +689,7 @@ dirtomon(int dir)
 	else
 		for (m = mons; m->next != selmon; m = m->next);
 	return m;
-}
+}*/
 
 void
 drawbar(Monitor *m)
@@ -820,7 +821,7 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
-void
+/*void
 focusmon(const Arg *arg)
 {
 	Monitor *m;
@@ -832,7 +833,7 @@ focusmon(const Arg *arg)
 	unfocus(selmon->sel, 0);
 	selmon = m;
 	focus(NULL);
-}
+}*/
 
 void
 focusstack(const Arg *arg)
@@ -1115,7 +1116,7 @@ maprequest(XEvent *e)
 		manage(ev->window, &wa);
 }
 
-void
+/*void
 monocle(Monitor *m)
 {
 	unsigned int n = 0;
@@ -1124,11 +1125,11 @@ monocle(Monitor *m)
 	for (c = m->clients; c; c = c->next)
 		if (ISVISIBLE(c))
 			n++;
-	if (n > 0) /* override layout symbol */
+	if (n > 0) // override layout symbol
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
 		resize(c, m->wx - c->bw, m->wy, m->ww, m->wh, False);
-}
+}*/
 
 void
 motionnotify(XEvent *e)
@@ -1677,13 +1678,13 @@ tag(const Arg *arg)
 	}
 }
 
-void
+/*void
 tagmon(const Arg *arg)
 {
 	if (!selmon->sel || !mons->next)
 		return;
 	sendmon(selmon->sel, dirtomon(arg->i));
-}
+}*/
 
 void
 tile(Monitor *m)
@@ -1745,7 +1746,7 @@ togglefloating(const Arg *arg)
 	arrange(selmon);
 }
 
-void
+/*void
 toggletag(const Arg *arg)
 {
 	unsigned int newtags;
@@ -1758,7 +1759,7 @@ toggletag(const Arg *arg)
 		focus(NULL);
 		arrange(selmon);
 	}
-}
+}*/
 
 void
 toggleview(const Arg *arg)
