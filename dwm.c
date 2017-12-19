@@ -2150,3 +2150,4 @@ main(int argc, char *argv[])
 }
 
 #include "maximize.c"
+#include "edgemove.c"
