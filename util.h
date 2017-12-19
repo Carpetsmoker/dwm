@@ -15,3 +15,7 @@ void die(const char *fmt, ...);
 void *ecalloc(size_t nmemb, size_t size);
 
 void restart(const Arg *arg);
+void maximize(int x, int y, int w, int h);
+void togglemaximize(const Arg *arg);
+void toggleverticalmax(const Arg *arg);
+void togglehorizontalmax(const Arg *arg);
