@@ -54,9 +54,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* commands */
-static const char *dmenufavs[] =  { "dmenu_favs", NULL }; 
-static const char *dmenucmd[] =   { "dmenu_run", NULL }; 
-static const char *dmenurs[] =    { "dmenu_rs", NULL };
+static const char *dmenu_favs[] =  { "dmenu_favs", NULL }; 
+static const char *dmenu_cmd[] =   { "dmenu_run", NULL }; 
+static const char *dmenu_rs[] =    { "dmenu_rs", NULL };
+static const char *dmenu_uni[] =    { "dmenu_uni", NULL };
+static const char *dmenu_emoji[] =  { "dmenu_uni", "emoji", NULL };
 static const char *findcursor[] = { "find-cursor", NULL };
 
 static const char *termcmd[]  = { "st", NULL };
@@ -74,9 +76,11 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 
 	/* Launching programs */
-	{ MODKEY,                       XK_r,      spawn,             {.v = dmenufavs } },
-	{ MODKEY|ShiftMask,             XK_r,      spawn,             {.v = dmenucmd } },
-	{ MODKEY,                       XK_e,      spawn,             {.v = dmenurs } },
+	{ MODKEY,                       XK_r,      spawn,             {.v = dmenu_favs } },
+	{ MODKEY|ShiftMask,             XK_r,      spawn,             {.v = dmenu_cmd } },
+	{ MODKEY,                       XK_e,      spawn,             {.v = dmenu_rs } },
+	{ MODKEY,                       XK_u,      spawn,             {.v = dmenu_uni } },
+	{ MODKEY|ShiftMask,             XK_u,      spawn,             {.v = dmenu_emoji } },
 
 	{ MODKEY,                       XK_x,      spawn,             {.v = termcmd } },
 	{ MODKEY,                       XK_backslash, togglescratch,  {.v = scratchpadcmd } },
