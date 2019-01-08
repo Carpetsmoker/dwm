@@ -3,56 +3,33 @@
 
 include config.mk
 
-SRC = drw.c dwm.c util.c restart.c
-OBJ = ${SRC:.c=.o}
+NAME=dwm
 
-all: options dwm
+all: options config.h
+	${CC} -o ${NAME} *.c ${CFLAGS} ${LDFLAGS}
 
 options:
-	@echo dwm build options:
+	@echo ${NAME} build options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
 
-.c.o:
-	${CC} -c ${CFLAGS} $<
-
-${OBJ}: config.h config.mk
-
 config.h:
-	@echo creating $@ from config.def.h
-	@cp config.def.h $@
-
-dwm: ${OBJ}
-	${CC} -o $@ ${OBJ} ${LDFLAGS}
+	cp config.def.h config.h
 
 clean:
-	@echo cleaning
-	@rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
-
-dist: clean
-	@echo creating dist tarball
-	@mkdir -p dwm-${VERSION}
-	@cp -R LICENSE TODO BUGS Makefile README config.def.h config.mk \
-		dwm.1 drw.h util.h ${SRC} dwm.png transient.c dwm-${VERSION}
-	@tar -cf dwm-${VERSION}.tar dwm-${VERSION}
-	@gzip dwm-${VERSION}.tar
-	@rm -rf dwm-${VERSION}
+	rm -f ${NAME}
 
 install: all
-	@echo installing executable file to ${DESTDIR}${PREFIX}/bin
-	@mkdir -p ${DESTDIR}${PREFIX}/bin
-	@cp -f dwm ${DESTDIR}${PREFIX}/bin
-	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	@echo installing manual page to ${DESTDIR}${MANPREFIX}/man1
-	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	@sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	@chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	mkdir -p ${DESTDIR}${PREFIX}/bin
+	cp -f ${NAME} ${DESTDIR}${PREFIX}/bin
+	chmod 755 ${DESTDIR}${PREFIX}/bin/${NAME}
+	mkdir -p ${DESTDIR}${MANPREFIX}/man1
+	sed "s/VERSION/${VERSION}/g" < ${NAME}.1 > ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
+	chmod 644 ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
 
 uninstall:
-	@echo removing executable file from ${DESTDIR}${PREFIX}/bin
-	@rm -f ${DESTDIR}${PREFIX}/bin/dwm
-	@echo removing manual page from ${DESTDIR}${MANPREFIX}/man1
-	@rm -f ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	rm -f ${DESTDIR}${PREFIX}/bin/${NAME}
+	rm -f ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all options clean install uninstall
