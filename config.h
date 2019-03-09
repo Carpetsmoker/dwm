@@ -28,9 +28,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "Google-chrome",  NULL, NULL,       1 << 2,       0,           -1 },
+	{ "Spotify",  NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
@@ -54,12 +53,13 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* commands */
-static const char *dmenu_favs[] =  { "dmenu_favs", NULL }; 
-static const char *dmenu_cmd[] =   { "dmenu_run", NULL }; 
-static const char *dmenu_rs[] =    { "dmenu_rs", NULL };
-static const char *dmenu_uni[] =    { "dmenu_uni", NULL };
-static const char *dmenu_emoji[] =  { "dmenu_uni", "emoji", NULL };
-static const char *findcursor[] = { "find-cursor", NULL };
+static const char *dmenu_favs[] =   { "dmenu-favs", NULL }; 
+static const char *dmenu_cmd[] =    { "dmenu_run", NULL }; 
+static const char *dmenu_rs[] =     { "dmenu-rs", NULL };
+static const char *dmenu_pass[] =   { "dmenu-pass", NULL };
+static const char *dmenu_uni[] =    { "dmenu-uni", NULL };
+static const char *dmenu_emoji[] =  { "dmenu-uni", "emoji", NULL };
+static const char *findcursor[] =   { "find-cursor", NULL };
 
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
@@ -75,10 +75,13 @@ static const char *volume_micmute[] =   { "wm-volume",     "micmute", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 
+	//{ 0,                       XK_F2,     spawn,           { .v = findcursor } },
+
 	/* Launching programs */
 	{ MODKEY,                       XK_r,      spawn,             {.v = dmenu_favs } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,             {.v = dmenu_cmd } },
 	{ MODKEY,                       XK_e,      spawn,             {.v = dmenu_rs } },
+	{ MODKEY,                       XK_p,      spawn,             {.v = dmenu_pass } },
 	{ MODKEY,                       XK_u,      spawn,             {.v = dmenu_uni } },
 	{ MODKEY|ShiftMask,             XK_u,      spawn,             {.v = dmenu_emoji } },
 
